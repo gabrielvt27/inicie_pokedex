@@ -34,17 +34,30 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Pokedéx'),
-                    Text(
-                      'Todas as espécies de pokémons\nestão esperando por você!',
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Pokedéx',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppStyles.kPrimaryTextColor,
+                        ),
+                      ),
+                      Text(
+                        'Todas as espécies de pokémons\nestão esperando por você!',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppStyles.kPrimaryTextColor,
+                        ),
+                      ),
+                      TextField(),
+                    ],
+                  ),
                 ),
-                Spacer(),
                 Image.asset(
                   'assets/images/pikachu.png',
                 ),
