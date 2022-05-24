@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:inicie_pokedex/app_styles.dart';
+
+import '../../app_styles.dart';
+import '../components/textsearch_area_mobile.dart';
+import '../components/type_search_mobile.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: const Drawer(),
       appBar: AppBar(
@@ -22,49 +26,32 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            padding: const EdgeInsets.all(AppStyles.kDefaultPadding),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Color(0xFFF1B0B3).withOpacity(0.1),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Image.asset('assets/images/dots1_banner.png'),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Pokedéx',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: AppStyles.kPrimaryTextColor,
-                        ),
-                      ),
-                      Text(
-                        'Todas as espécies de pokémons\nestão esperando por você!',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppStyles.kPrimaryTextColor,
-                        ),
-                      ),
-                      TextField(),
-                    ],
-                  ),
-                ),
-                Image.asset(
-                  'assets/images/pikachu.png',
-                ),
-              ],
+            SizedBox(
+              height: size.height,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  TextSearchAreaMobile(),
+                  TypeSearchMobile(),
+                ],
+              ),
             ),
-          )
-        ],
+            Positioned(
+              top: 260,
+              left: 10,
+              child: Image.asset('assets/images/dots1_banner.png'),
+            ),
+          ],
+        ),
       ),
     );
   }
