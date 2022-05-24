@@ -9,12 +9,12 @@ class TypeSearchMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * .11,
+      height: AppStyles.kDefaultPadding * 5,
       padding: const EdgeInsets.only(
         left: AppStyles.kDefaultPadding * 2,
         top: AppStyles.kDefaultPadding,
+        bottom: AppStyles.kDefaultPadding,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,18 +27,20 @@ class TypeSearchMobile extends StatelessWidget {
               color: AppStyles.kPrimaryTextColor,
             ),
           ),
-          SizedBox(
-            height: size.height * .02,
+          const SizedBox(
+            height: AppStyles.kDefaultPadding / 2,
           ),
-          Flexible(
+          Expanded(
+            flex: 1,
             child: ListView.builder(
+              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: types.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: size.width * .2,
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(right: 8),
+                  width: AppStyles.kDefaultPadding * 3.5,
                   decoration: BoxDecoration(
                     color: types[index]["color"],
                     borderRadius: const BorderRadius.all(Radius.circular(5)),

@@ -9,7 +9,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: const Drawer(),
       appBar: AppBar(
@@ -34,16 +33,13 @@ class HomeScreen extends StatelessWidget {
               right: 0,
               child: Image.asset('assets/images/dots1_banner.png'),
             ),
-            SizedBox(
-              height: size.height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  TextSearchAreaMobile(),
-                  TypeSearchMobile(),
-                ],
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                TextSearchAreaMobile(),
+                TypeSearchMobile(),
+              ],
             ),
             Positioned(
               top: 260,
