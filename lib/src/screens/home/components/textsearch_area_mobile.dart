@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../app_styles.dart';
+import 'package:inicie_pokedex/app_styles.dart';
 
 class TextSearchAreaMobile extends StatelessWidget {
   const TextSearchAreaMobile({

@@ -43,6 +43,7 @@ class PokeBannerTitle extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 16,
+            color: AppStyles.kPrimaryTextColor,
           ),
         ),
       ],

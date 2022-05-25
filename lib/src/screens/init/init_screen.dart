@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../app_styles.dart';
-import '../screens/home_screen.dart';
-import '../components/poke_banner.dart';
-import '../components/poke_banner_title.dart';
+import '../../../app_styles.dart';
+import '../home/home_screen.dart';
+import '../../components/poke_banner.dart';
+import '../../components/poke_banner_title.dart';
 
 class InitScreen extends StatelessWidget {
   const InitScreen({Key? key}) : super(key: key);

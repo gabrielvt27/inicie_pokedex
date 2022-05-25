@@ -16,7 +16,10 @@ class PokemonTypeItem extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.only(right: 8),
-      width: AppStyles.kDefaultPadding * 3.5,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppStyles.kDefaultPadding,
+        vertical: AppStyles.kDefaultPadding / 4,
+      ),
       decoration: BoxDecoration(
         color: color,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
