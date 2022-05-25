@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inicie_pokedex/src/components/grid_mais_procurados.dart';
 
 import '../../app_styles.dart';
 import '../components/textsearch_area_mobile.dart';
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       drawer: const Drawer(),
       appBar: AppBar(
@@ -25,29 +27,28 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Image.asset('assets/images/dots1_banner.png'),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                TextSearchAreaMobile(),
-                TypeSearchMobile(),
-              ],
-            ),
-            Positioned(
-              top: 260,
-              left: 10,
-              child: Image.asset('assets/images/dots1_banner.png'),
-            ),
-          ],
-        ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            right: 0,
+            child: Image.asset('assets/images/dots1_banner.png'),
+          ),
+          Positioned(
+            top: 260,
+            left: 10,
+            child: Image.asset('assets/images/dots1_banner.png'),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextSearchAreaMobile(),
+              TypeSearchMobile(),
+              GridMaisProcurados(),
+            ],
+          ),
+        ],
       ),
     );
   }
