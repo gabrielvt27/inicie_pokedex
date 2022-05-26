@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
+import 'package:inicie_pokedex/src/models/pokemon_type_model.dart';
 
 class PokemonTypeItem extends StatelessWidget {
   const PokemonTypeItem({
     Key? key,
-    required this.color,
-    required this.typeName,
+    required this.pokemonType,
   }) : super(key: key);
 
-  final Color color;
-  final String typeName;
+  final PokemonTypeModel pokemonType;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.symmetric(
-        horizontal: AppStyles.kDefaultPadding,
+        horizontal: AppStyles.kDefaultPadding / 2,
         vertical: AppStyles.kDefaultPadding / 4,
       ),
       decoration: BoxDecoration(
-        color: color,
+        color: pokemonType.color,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
       child: Text(
-        typeName,
+        pokemonType.name,
         style: const TextStyle(
           color: Colors.white,
         ),

@@ -1,15 +1,38 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
 import 'package:inicie_pokedex/src/screens/home/components/grid_mais_procurados.dart';
 import 'package:inicie_pokedex/src/screens/home/components/textsearch_area_mobile.dart';
 import 'package:inicie_pokedex/src/screens/home/components/type_search_mobile.dart';
+import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
+
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
+  final PokemonService pokemonService = PokemonService(Dio());
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        pokemonService.getMostWantedPokemons();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Stack(
         children: [
           Positioned(
@@ -25,9 +48,9 @@ class HomeBody extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              TextSearchAreaMobile(),
-              Padding(
+            children: [
+              const TextSearchAreaMobile(),
+              const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AppStyles.kDefaultPadding,
                 ),
@@ -40,10 +63,13 @@ class HomeBody extends StatelessWidget {
                   ),
                 ),
               ),
-              TypeSearchMobile(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppStyles.kDefaultPadding,
+              const TypeSearchMobile(),
+              const Padding(
+                padding: EdgeInsets.only(
+                  left: AppStyles.kDefaultPadding,
+                  right: AppStyles.kDefaultPadding,
+                  top: AppStyles.kDefaultPadding,
+                  bottom: AppStyles.kDefaultPadding / 2,
                 ),
                 child: Text(
                   'Mais Procurados',
@@ -54,7 +80,9 @@ class HomeBody extends StatelessWidget {
                   ),
                 ),
               ),
-              GridMaisProcurados(),
+              GridMaisProcurados(
+                pokemonService: pokemonService,
+              ),
             ],
           ),
         ],

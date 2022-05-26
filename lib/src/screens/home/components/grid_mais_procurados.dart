@@ -1,26 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
-import 'package:inicie_pokedex/src/screens/home/components/pokemon_type_item.dart';
+import 'package:inicie_pokedex/src/components/pokemon_card.dart';
+import 'package:inicie_pokedex/src/models/pokemon_model.dart';
+import 'package:inicie_pokedex/src/screens/pokemon_details/pokemon_details_screen.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 
-class GridMaisProcurados extends StatefulWidget {
+class GridMaisProcurados extends StatelessWidget {
   const GridMaisProcurados({
     Key? key,
+    required this.pokemonService,
   }) : super(key: key);
 
-  @override
-  State<GridMaisProcurados> createState() => _GridMaisProcuradosState();
-}
-
-class _GridMaisProcuradosState extends State<GridMaisProcurados> {
-  final pokemonService = PokemonService(Dio());
-
-  @override
-  void initState() {
-    super.initState();
-    pokemonService.getMostWantedPokemons();
-  }
+  final PokemonService pokemonService;
 
   @override
   Widget build(BuildContext context) {
@@ -28,39 +19,58 @@ class _GridMaisProcuradosState extends State<GridMaisProcurados> {
       padding: const EdgeInsets.symmetric(
         horizontal: AppStyles.kDefaultPadding,
       ),
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: 10,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: AppStyles.kDefaultPadding / 2,
-          crossAxisSpacing: AppStyles.kDefaultPadding / 5,
-          childAspectRatio: 1.3,
-        ),
-        itemBuilder: (context, index) => Card(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('nome'),
-                  PokemonTypeItem(
-                    color: Colors.amber,
-                    typeName: "aaa",
+      child: FutureBuilder(
+        future: pokemonService.getMostWantedPokemons(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(AppStyles.kDefaultPadding),
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(
+                      AppStyles.kSecondaryTextColor,
+                    ),
                   ),
-                  Text('#COD'),
-                ],
-              ),
-              Expanded(
-                child: Image.asset(
-                  'assets/images/pokemon_card_background.png',
                 ),
-              ),
-            ],
-          ),
-        ),
+              );
+            case ConnectionState.done:
+              return ValueListenableBuilder<List<PokemonModel>>(
+                valueListenable: pokemonService.pokemonList,
+                builder: (context, pokemonList, child) {
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: pokemonList.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: AppStyles.kDefaultPadding / 2,
+                      crossAxisSpacing: AppStyles.kDefaultPadding / 5,
+                      childAspectRatio: 1.3,
+                    ),
+                    itemBuilder: (context, index) {
+                      final pokemon = pokemonList[index];
+                      return PokemonCard(
+                        pokemon: pokemon,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PokemonDetailsScreen(
+                              pokemonModel: pokemon,
+                              pokemonService: pokemonService,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            default:
+              return Container();
+          }
+        },
       ),
     );
   }

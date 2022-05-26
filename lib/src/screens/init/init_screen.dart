@@ -16,7 +16,7 @@ class InitScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               width: double.infinity,

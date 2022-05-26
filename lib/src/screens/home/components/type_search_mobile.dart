@@ -41,8 +41,7 @@ class TypeSearchMobile extends StatelessWidget {
               return Container(
                 margin: margin,
                 child: PokemonTypeItem(
-                  color: pokemonType.color,
-                  typeName: pokemonType.name,
+                  pokemonType: pokemonType,
                 ),
               );
             },
