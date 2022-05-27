@@ -24,11 +24,11 @@ class TypeSearchMobile extends StatelessWidget {
               if (index == 0) {
                 margin = const EdgeInsets.only(
                   left: AppStyles.kDefaultPadding,
-                  right: AppStyles.kDefaultPadding / 5,
+                  right: AppStyles.kDefaultPadding / 2,
                 );
               } else if (index < pokemonTypeList.length - 1) {
                 margin = const EdgeInsets.only(
-                  right: AppStyles.kDefaultPadding / 5,
+                  right: AppStyles.kDefaultPadding / 2,
                 );
               } else {
                 margin = const EdgeInsets.only(

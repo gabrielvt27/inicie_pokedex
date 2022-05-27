@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/src/screens/home/components/pokemon_type_item.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
@@ -62,8 +63,21 @@ class PokemonCard extends StatelessWidget {
                   Image.asset(
                     'assets/images/pokemon_card_background.png',
                   ),
-                  Image.network(
-                    pokemon.imageUrl,
+                  CachedNetworkImage(
+                    imageUrl: pokemon.imageUrl,
+                    placeholder: (context, url) => Container(
+                      margin: const EdgeInsets.only(
+                        left: AppStyles.kDefaultPadding,
+                        top: AppStyles.kDefaultPadding,
+                      ),
+                      child: const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(
+                          AppStyles.kSecondaryTextColor,
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ],
               ),

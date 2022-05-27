@@ -1,20 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
-
-const limitPokemonsApi = 10;
+import 'package:inicie_pokedex/utils/constants.dart';
 
 class PokemonService {
   ValueNotifier<List<PokemonModel>> pokemonList =
       ValueNotifier(<PokemonModel>[]);
-  String? nextPage =
-      'https://pokeapi.co/api/v2/pokemon/?limit=$limitPokemonsApi';
+  String? nextPage = apiInitialRoute;
 
   final Dio dio;
 
   PokemonService(this.dio);
 
-  getMostWantedPokemons() async {
+  getMostWantedPokemons({String? url}) async {
+    nextPage = (url != null) ? url : nextPage;
+
     if (nextPage != null) {
       final response = await dio.get(nextPage!);
 

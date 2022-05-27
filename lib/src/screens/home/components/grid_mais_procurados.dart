@@ -4,6 +4,7 @@ import 'package:inicie_pokedex/src/components/pokemon_card.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/src/screens/pokemon_details/pokemon_details_screen.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
+import '../../../../utils/constants.dart';
 
 class GridMaisProcurados extends StatelessWidget {
   const GridMaisProcurados({
@@ -20,7 +21,7 @@ class GridMaisProcurados extends StatelessWidget {
         horizontal: AppStyles.kDefaultPadding,
       ),
       child: FutureBuilder(
-        future: pokemonService.getMostWantedPokemons(),
+        future: pokemonService.getMostWantedPokemons(url: apiInitialRoute),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
