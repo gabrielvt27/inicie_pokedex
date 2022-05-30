@@ -12,7 +12,7 @@ class PokemonService {
 
   PokemonService(this.dio);
 
-  getMostWantedPokemons({String? url}) async {
+  Future<List<PokemonModel>> getMostWantedPokemons({String? url}) async {
     nextPage = (url != null) ? url : nextPage;
 
     if (nextPage != null) {
@@ -35,6 +35,8 @@ class PokemonService {
         pokemonList.value = [...pokemonList.value, ...pokemonListApi];
       }
     }
+
+    return pokemonList.value;
   }
 
   Future<PokemonModel?> _getPokemonData(String pokemonUrl) async {

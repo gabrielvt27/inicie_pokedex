@@ -6,36 +6,33 @@ import '../../app_styles.dart';
 class PokeBannerTitle extends StatelessWidget {
   const PokeBannerTitle({
     Key? key,
-    this.textAlign = TextAlign.left,
+    this.textAlign = CrossAxisAlignment.center,
+    this.widget,
   }) : super(key: key);
 
-  final TextAlign textAlign;
+  final CrossAxisAlignment textAlign;
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: textAlign,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.all(AppStyles.kDefaultPadding),
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppStyles.kDefaultPadding,
-          ),
-          child: RichText(
-            textAlign: textAlign,
-            text: TextSpan(
-              style: GoogleFonts.nunito(
-                fontSize: 35,
-                fontWeight: FontWeight.w700,
-              ),
-              children: const [
-                TextSpan(
-                    text: "Explore o mundo dos ",
-                    style: TextStyle(color: AppStyles.kPrimaryTextColor)),
-                TextSpan(
-                    text: "Pokémons",
-                    style: TextStyle(color: AppStyles.kSecondaryTextColor)),
-              ],
+        RichText(
+          text: TextSpan(
+            style: GoogleFonts.nunito(
+              fontSize: 35,
+              fontWeight: FontWeight.w700,
             ),
+            children: const [
+              TextSpan(
+                  text: "Explore o mundo dos ",
+                  style: TextStyle(color: AppStyles.kPrimaryTextColor)),
+              TextSpan(
+                  text: "Pokémons",
+                  style: TextStyle(color: AppStyles.kSecondaryTextColor)),
+            ],
           ),
         ),
         const Text(
@@ -46,6 +43,7 @@ class PokeBannerTitle extends StatelessWidget {
             color: AppStyles.kPrimaryTextColor,
           ),
         ),
+        if (widget != null) widget!,
       ],
     );
   }

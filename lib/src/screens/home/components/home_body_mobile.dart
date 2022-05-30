@@ -6,14 +6,14 @@ import 'package:inicie_pokedex/src/screens/home/components/textsearch_area_mobil
 import 'package:inicie_pokedex/src/screens/home/components/type_search_mobile.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 
-class HomeBody extends StatefulWidget {
-  const HomeBody({Key? key}) : super(key: key);
+class HomeBodyMobile extends StatefulWidget {
+  const HomeBodyMobile({Key? key}) : super(key: key);
 
   @override
-  State<HomeBody> createState() => _HomeBodyState();
+  State<HomeBodyMobile> createState() => _HomeBodyMobileState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _HomeBodyMobileState extends State<HomeBodyMobile> {
   final PokemonService pokemonService = PokemonService(Dio());
   final ScrollController _scrollController = ScrollController();
 
