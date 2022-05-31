@@ -23,29 +23,33 @@ class PokemonCard extends StatelessWidget {
         child: kIsWeb
             ? Padding(
                 padding: const EdgeInsets.all(
-                  AppStyles.kDefaultPadding,
+                  AppStyles.kDefaultPadding / 2,
                 ),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          pokemon.name,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: AppStyles.kPrimaryTextColor,
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            pokemon.name,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          pokemon.cod,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppStyles.kPrimaryTextColor,
+                          Text(
+                            pokemon.cod,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Expanded(
                       child: CachedNetworkImage(
@@ -65,45 +69,53 @@ class PokemonCard extends StatelessWidget {
                             const Icon(Icons.error),
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Altura:",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: AppStyles.kPrimaryTextColor,
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          const Text(
+                            "Altura:",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${pokemon.height}cm',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppStyles.kPrimaryTextColor,
+                          Text(
+                            '${pokemon.height}cm',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Peso",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: AppStyles.kPrimaryTextColor,
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          const Text(
+                            "Peso",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${pokemon.weight}kg',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppStyles.kPrimaryTextColor,
+                          Text(
+                            '${pokemon.weight}kg',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppStyles.kPrimaryTextColor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

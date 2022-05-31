@@ -6,20 +6,23 @@ import '../../app_styles.dart';
 class PokeBannerTitle extends StatelessWidget {
   const PokeBannerTitle({
     Key? key,
-    this.textAlign = CrossAxisAlignment.center,
+    this.columnAlign = CrossAxisAlignment.center,
+    this.textAlign = TextAlign.center,
     this.widget,
   }) : super(key: key);
 
-  final CrossAxisAlignment textAlign;
+  final TextAlign textAlign;
+  final CrossAxisAlignment columnAlign;
   final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: textAlign,
+      crossAxisAlignment: columnAlign,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         RichText(
+          textAlign: textAlign,
           text: TextSpan(
             style: GoogleFonts.nunito(
               fontSize: 35,

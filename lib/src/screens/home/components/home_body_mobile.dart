@@ -24,7 +24,7 @@ class _HomeBodyMobileState extends State<HomeBodyMobile> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        pokemonService.getMostWantedPokemons();
+        pokemonService.fecthPokemons();
       }
     });
   }
@@ -65,11 +65,8 @@ class _HomeBodyMobileState extends State<HomeBodyMobile> {
               ),
               const TypeSearchMobile(),
               const Padding(
-                padding: EdgeInsets.only(
-                  left: AppStyles.kDefaultPadding,
-                  right: AppStyles.kDefaultPadding,
-                  top: AppStyles.kDefaultPadding,
-                  bottom: AppStyles.kDefaultPadding / 2,
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppStyles.kDefaultPadding,
                 ),
                 child: Text(
                   'Mais Procurados',

@@ -27,7 +27,8 @@ class InitScreen extends StatelessWidget {
               child: const PokeBanner(),
             ),
             PokeBannerTitle(
-              textAlign: CrossAxisAlignment.center,
+              columnAlign: CrossAxisAlignment.center,
+              textAlign: TextAlign.center,
               widget: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: AppStyles.kDefaultPadding * 4,

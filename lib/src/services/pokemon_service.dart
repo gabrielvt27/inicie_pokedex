@@ -4,39 +4,60 @@ import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/utils/constants.dart';
 
 class PokemonService {
+  final Dio dio;
+
+  String? nextPage = fetchPokemonsRoute;
+  bool _loading = false;
   ValueNotifier<List<PokemonModel>> pokemonList =
       ValueNotifier(<PokemonModel>[]);
-  String? nextPage = apiInitialRoute;
-
-  final Dio dio;
 
   PokemonService(this.dio);
 
-  Future<List<PokemonModel>> getMostWantedPokemons({String? url}) async {
-    nextPage = (url != null) ? url : nextPage;
+  Future fecthPokemons() async {
+    if (_loading || nextPage == null) return;
 
-    if (nextPage != null) {
-      final response = await dio.get(nextPage!);
+    _loading = true;
 
-      if (response.statusCode == 200) {
-        nextPage = response.data["next"] as String?;
+    final response = await dio.get(nextPage!);
 
-        final pokemonsDataList = response.data["results"] as List;
-        List<PokemonModel> pokemonListApi = <PokemonModel>[];
+    if (response.statusCode == 200) {
+      nextPage = response.data["next"] as String?;
 
-        for (Map pokemonData in pokemonsDataList) {
-          final pokemon = await _getPokemonData(pokemonData["url"]);
+      final pokemonsDataList = response.data["results"] as List;
+      List<PokemonModel> pokemonListApi = <PokemonModel>[];
 
-          if (pokemon != null) {
-            pokemonListApi.add(pokemon);
-          }
+      for (Map pokemonData in pokemonsDataList) {
+        final pokemon = await _getPokemonData(pokemonData["url"]);
+
+        if (pokemon != null) {
+          pokemonListApi.add(pokemon);
         }
+      }
 
-        pokemonList.value = [...pokemonList.value, ...pokemonListApi];
+      pokemonList.value = [...pokemonList.value, ...pokemonListApi];
+    }
+
+    _loading = false;
+  }
+
+  Future<List<PokemonModel>> fetchPokemonsBanner() async {
+    final response = await dio.get(fetchPokemonsBannerRoute);
+
+    List<PokemonModel> pokemonListApi = <PokemonModel>[];
+
+    if (response.statusCode == 200) {
+      final pokemonsDataList = response.data["results"] as List;
+
+      for (Map pokemonData in pokemonsDataList) {
+        final pokemon = await _getPokemonData(pokemonData["url"]);
+
+        if (pokemon != null) {
+          pokemonListApi.add(pokemon);
+        }
       }
     }
 
-    return pokemonList.value;
+    return pokemonListApi;
   }
 
   Future<PokemonModel?> _getPokemonData(String pokemonUrl) async {
