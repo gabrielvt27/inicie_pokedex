@@ -8,6 +8,8 @@ class PokemonService {
 
   String? nextPage = fetchPokemonsRoute;
   bool _loading = false;
+
+  ValueNotifier<PokemonModel?> pokemon = ValueNotifier(null);
   ValueNotifier<List<PokemonModel>> pokemonList =
       ValueNotifier(<PokemonModel>[]);
 

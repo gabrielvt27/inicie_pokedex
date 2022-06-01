@@ -14,6 +14,7 @@ class PokemonDetailsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.maxFinite,
       padding: const EdgeInsets.all(AppStyles.kDefaultPadding * 2),
       decoration: BoxDecoration(
         color: AppStyles.kMobileSearchBackgroundColor,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inicie_pokedex/app_styles.dart';
@@ -55,16 +56,18 @@ class PokemonMainDetails extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/like.svg',
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/share.svg',
-                      ),
-                    ],
-                  ),
+                  kIsWeb
+                      ? Container()
+                      : Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/like.svg',
+                            ),
+                            SvgPicture.asset(
+                              'assets/icons/share.svg',
+                            ),
+                          ],
+                        ),
                   const SizedBox(
                     height: AppStyles.kDefaultPadding / 4,
                   ),

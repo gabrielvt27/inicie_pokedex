@@ -12,6 +12,7 @@ class PokemonModel {
   int defense;
   int weight;
   int height;
+  int speed;
   String url;
   String imageUrl;
   List<PokemonTypeModel> types;
@@ -27,6 +28,7 @@ class PokemonModel {
     required this.defense,
     required this.weight,
     required this.height,
+    required this.speed,
     required this.url,
     required this.imageUrl,
     required this.types,
@@ -61,6 +63,7 @@ class PokemonModel {
       hp: stats['hp'],
       attack: stats["attack"],
       defense: stats['defense'],
+      speed: stats['speed'],
       weight: json['weight'],
       height: json['height'],
     );

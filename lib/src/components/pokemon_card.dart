@@ -20,6 +20,7 @@ class PokemonCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        elevation: 8,
         child: kIsWeb
             ? Padding(
                 padding: const EdgeInsets.all(

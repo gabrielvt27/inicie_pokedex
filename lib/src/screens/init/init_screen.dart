@@ -14,77 +14,80 @@ class InitScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppStyles.kDefaultPadding,
-                vertical: AppStyles.kDefaultPadding,
-              ),
-              child: const PokeBanner(),
-            ),
-            PokeBannerTitle(
-              columnAlign: CrossAxisAlignment.center,
-              textAlign: TextAlign.center,
-              widget: Padding(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: double.infinity,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppStyles.kDefaultPadding * 4,
-                  vertical: AppStyles.kDefaultPadding,
+                  horizontal: AppStyles.kDefaultPadding,
+                  vertical: AppStyles.kDefaultPadding * 3,
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppStyles.kSecondaryTextColor.withOpacity(0.6),
-                        blurRadius: 15,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                child: const Center(child: PokeBanner()),
+              ),
+              PokeBannerTitle(
+                columnAlign: CrossAxisAlignment.center,
+                textAlign: TextAlign.center,
+                widget: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppStyles.kDefaultPadding * 4,
+                    vertical: AppStyles.kDefaultPadding,
                   ),
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppStyles.kSecondaryTextColor.withOpacity(0.6),
+                          blurRadius: 15,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: AppStyles.kSecondaryTextColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
+                      style: ElevatedButton.styleFrom(
+                        primary: AppStyles.kSecondaryTextColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(),
-                          Text(
-                            'Começar',
-                            style: GoogleFonts.nunito(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Spacer(),
+                            Text(
+                              'Começar',
+                              style: GoogleFonts.nunito(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          SvgPicture.asset(
-                            'assets/icons/arrow_rigth.svg',
-                          ),
-                        ],
+                            const Spacer(),
+                            SvgPicture.asset(
+                              'assets/icons/arrow_rigth.svg',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

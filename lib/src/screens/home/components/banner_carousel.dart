@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
 import 'package:inicie_pokedex/src/components/pokemon_card.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
+import 'package:inicie_pokedex/src/screens/home/components/action_button.dart';
 import 'package:inicie_pokedex/src/screens/pokemon_details/pokemon_details_screen.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 import 'package:inicie_pokedex/utils/sizeconfig.dart';
@@ -24,116 +25,78 @@ class _BannerCarouselState extends State<BannerCarousel> {
   int currentIndex = 0;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<PokemonModel>>(
       future: widget.pokemonService.fetchPokemonsBanner(),
       builder: (context, pokemonList) {
         return (pokemonList.hasData)
             ? LayoutBuilder(builder: (context, constraints) {
-                final width = constraints.biggest.width;
-                final height = constraints.biggest.height;
-                return Stack(
-                  children: [
-                    CarouselSlider.builder(
-                      carouselController: buttonCarouselController,
-                      options: CarouselOptions(
-                        initialPage: currentIndex,
-                        viewportFraction:
-                            SizeConfig.screenWidth >= 800 ? .3 : 1,
-                        enlargeCenterPage: true,
-                        aspectRatio: 3.0,
-                        height: SizeConfig.screenWidth >= 800
-                            ? height / 2
-                            : SizeConfig.screenWidth / 2,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                      ),
-                      itemCount: pokemonList.data!.length,
-                      itemBuilder: (BuildContext context, int itemIndex,
-                          int pageViewIndex) {
-                        final pokemon = pokemonList.data![itemIndex];
-                        return Padding(
-                          padding: SizeConfig.screenWidth >= 800
-                              ? const EdgeInsets.all(0)
-                              : EdgeInsets.symmetric(
-                                  horizontal: SizeConfig.screenWidth * .2,
+                final width = constraints.maxWidth;
+                final height = constraints.maxHeight;
+                return CarouselSlider.builder(
+                  carouselController: buttonCarouselController,
+                  options: CarouselOptions(
+                    scrollPhysics: const NeverScrollableScrollPhysics(),
+                    initialPage: currentIndex,
+                    viewportFraction: SizeConfig.screenWidth >= 900 ? .3 : 1,
+                    enlargeCenterPage: true,
+                    height: SizeConfig.screenHeight,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  itemCount: pokemonList.data!.length,
+                  itemBuilder:
+                      (BuildContext context, int itemIndex, int pageViewIndex) {
+                    final pokemon = pokemonList.data![itemIndex];
+                    return currentIndex == itemIndex
+                        ? Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: width * .01,
                                 ),
-                          child: Opacity(
-                            opacity: currentIndex == itemIndex ? 1 : .5,
-                            child: PokemonCard(
-                              pokemon: pokemon,
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PokemonDetailsScreen(
-                                    pokemonModel: pokemon,
-                                    pokemonService: widget.pokemonService,
-                                  ),
+                                child: PokemonCard(
+                                  pokemon: pokemon,
+                                  onTap: () => widget
+                                      .pokemonService.pokemon.value = pokemon,
                                 ),
                               ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ActionButton(
+                                    icon: Icons.keyboard_arrow_left_rounded,
+                                    size: height / 10,
+                                    onTap: () =>
+                                        buttonCarouselController.previousPage(),
+                                  ),
+                                  ActionButton(
+                                    icon: Icons.keyboard_arrow_right_rounded,
+                                    size: height / 10,
+                                    onTap: () =>
+                                        buttonCarouselController.nextPage(),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        : Opacity(
+                            opacity: .5,
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: width * .01,
+                              ),
+                              child: PokemonCard(
+                                pokemon: pokemon,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                    Positioned(
-                      top: SizeConfig.screenWidth >= 800
-                          ? height * .2
-                          : height * .4,
-                      left: SizeConfig.screenWidth >= 800
-                          ? width * .19
-                          : width * .05,
-                      width: SizeConfig.screenWidth >= 800
-                          ? width / 3
-                          : SizeConfig.screenWidth / 3,
-                      child: SizedBox(
-                        height: width / 25,
-                        width: width / 25,
-                        child: FloatingActionButton(
-                          backgroundColor: AppStyles.kSecondaryTextColor,
-                          onPressed: () =>
-                              buttonCarouselController.previousPage(),
-                          child: Icon(
-                            Icons.keyboard_arrow_left_rounded,
-                            color: Colors.white,
-                            size: width / 25,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: SizeConfig.screenWidth >= 800
-                          ? height * .2
-                          : height * .4,
-                      right: SizeConfig.screenWidth >= 800
-                          ? width * .19
-                          : width * .05,
-                      width: SizeConfig.screenWidth >= 800
-                          ? width / 3
-                          : SizeConfig.screenWidth / 3,
-                      child: SizedBox(
-                        height: width / 25,
-                        width: width / 25,
-                        child: FloatingActionButton(
-                          backgroundColor: AppStyles.kSecondaryTextColor,
-                          onPressed: () => buttonCarouselController.nextPage(),
-                          child: Icon(
-                            Icons.keyboard_arrow_right_rounded,
-                            color: Colors.white,
-                            size: width / 25,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                          );
+                  },
                 );
               })
             : Container();

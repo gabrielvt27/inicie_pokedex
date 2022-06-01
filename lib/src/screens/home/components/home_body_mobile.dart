@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
-import 'package:inicie_pokedex/src/screens/home/components/grid_mais_procurados.dart';
+import 'package:inicie_pokedex/src/screens/home/components/pokemons_mais_procurados_mobile.dart';
 import 'package:inicie_pokedex/src/screens/home/components/textsearch_area_mobile.dart';
 import 'package:inicie_pokedex/src/screens/home/components/type_search_mobile.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
@@ -77,7 +77,7 @@ class _HomeBodyMobileState extends State<HomeBodyMobile> {
                   ),
                 ),
               ),
-              GridMaisProcurados(
+              PokemonsMaisProcuradosMobile(
                 pokemonService: pokemonService,
               ),
             ],

@@ -5,8 +5,8 @@ import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/src/screens/pokemon_details/pokemon_details_screen.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 
-class GridMaisProcurados extends StatefulWidget {
-  const GridMaisProcurados({
+class PokemonsMaisProcuradosMobile extends StatefulWidget {
+  const PokemonsMaisProcuradosMobile({
     Key? key,
     required this.pokemonService,
   }) : super(key: key);
@@ -14,10 +14,12 @@ class GridMaisProcurados extends StatefulWidget {
   final PokemonService pokemonService;
 
   @override
-  State<GridMaisProcurados> createState() => _GridMaisProcuradosState();
+  State<PokemonsMaisProcuradosMobile> createState() =>
+      _PokemonsMaisProcuradosMobileState();
 }
 
-class _GridMaisProcuradosState extends State<GridMaisProcurados> {
+class _PokemonsMaisProcuradosMobileState
+    extends State<PokemonsMaisProcuradosMobile> {
   @override
   void initState() {
     super.initState();
