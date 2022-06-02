@@ -1,10 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:inicie_pokedex/app_styles.dart';
 import 'package:inicie_pokedex/src/components/pokemon_card.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/src/screens/home/components/action_button.dart';
-import 'package:inicie_pokedex/src/screens/pokemon_details/pokemon_details_screen.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 import 'package:inicie_pokedex/utils/sizeconfig.dart';
 

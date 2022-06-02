@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inicie_pokedex/app_styles.dart';
 import 'package:inicie_pokedex/src/models/pokemon_model.dart';
 import 'package:inicie_pokedex/src/screens/home/components/pokemon_type_item.dart';
+import 'package:inicie_pokedex/src/screens/pokemon_details/components/pokemon_details_description.dart';
 import 'package:inicie_pokedex/src/services/pokemon_service.dart';
 
 class PokemonMainDetails extends StatelessWidget {
@@ -22,10 +23,12 @@ class PokemonMainDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppStyles.kDefaultPadding,
-            vertical: AppStyles.kDefaultPadding / 2,
-          ),
+          padding: kIsWeb
+              ? const EdgeInsets.all(0)
+              : const EdgeInsets.symmetric(
+                  horizontal: AppStyles.kDefaultPadding,
+                  vertical: AppStyles.kDefaultPadding / 2,
+                ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -72,17 +75,29 @@ class PokemonMainDetails extends StatelessWidget {
                     height: AppStyles.kDefaultPadding / 4,
                   ),
                   Row(
-                    children: List.generate(
-                      pokemonModel.types.length,
-                      (index) => Container(
-                        margin: const EdgeInsets.only(
-                          left: AppStyles.kDefaultPadding / 2,
+                    children: [
+                      kIsWeb
+                          ? const Text(
+                              "Tipo:",
+                              style: TextStyle(
+                                color: AppStyles.kPrimaryTextColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          : Container(),
+                      ...List.generate(
+                        pokemonModel.types.length,
+                        (index) => Container(
+                          margin: const EdgeInsets.only(
+                            left: AppStyles.kDefaultPadding / 2,
+                          ),
+                          child: PokemonTypeItem(
+                            pokemonType: pokemonModel.types[index],
+                          ),
                         ),
-                        child: PokemonTypeItem(
-                          pokemonType: pokemonModel.types[index],
-                        ),
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -90,47 +105,33 @@ class PokemonMainDetails extends StatelessWidget {
           ),
         ),
         const Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppStyles.kDefaultPadding,
-            vertical: AppStyles.kDefaultPadding / 2,
-          ),
+          padding: kIsWeb
+              ? EdgeInsets.symmetric(
+                  vertical: AppStyles.kDefaultPadding / 2,
+                )
+              : EdgeInsets.symmetric(
+                  horizontal: AppStyles.kDefaultPadding,
+                  vertical: AppStyles.kDefaultPadding / 2,
+                ),
           child: Text(
             "Descrição",
             style: TextStyle(
               color: AppStyles.kPrimaryTextColor,
-              fontSize: 18,
+              fontSize: kIsWeb ? 22 : 18,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppStyles.kDefaultPadding,
-          ),
-          child: (pokemonModel.description == null)
-              ? FutureBuilder<String?>(
-                  future: pokemonService.getDescriptionPokemon(pokemonModel),
-                  builder: (context, snapshot) {
-                    return (snapshot.hasData)
-                        ? Text(
-                            snapshot.data!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: AppStyles.kPrimaryTextColor,
-                            ),
-                          )
-                        : Container();
-                  },
-                )
-              : Text(
-                  pokemonModel.description!,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppStyles.kPrimaryTextColor,
-                  ),
+          padding: kIsWeb
+              ? const EdgeInsets.all(0)
+              : const EdgeInsets.symmetric(
+                  horizontal: AppStyles.kDefaultPadding,
                 ),
+          child: PokemonDetailsDescription(
+            pokemonModel: pokemonModel,
+            pokemonService: pokemonService,
+          ),
         ),
       ],
     );

@@ -17,7 +17,7 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Card(
         elevation: 8,
@@ -55,17 +55,6 @@ class PokemonCard extends StatelessWidget {
                     Expanded(
                       child: CachedNetworkImage(
                         imageUrl: pokemon.imageUrl,
-                        placeholder: (context, url) => Container(
-                          margin: const EdgeInsets.only(
-                            left: AppStyles.kDefaultPadding,
-                            top: AppStyles.kDefaultPadding,
-                          ),
-                          child: const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(
-                              AppStyles.kSecondaryTextColor,
-                            ),
-                          ),
-                        ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),

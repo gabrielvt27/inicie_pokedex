@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:inicie_pokedex/app_styles.dart';
 
@@ -15,52 +16,47 @@ class PokemonDetailsStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppStyles.kDefaultPadding,
-        right: AppStyles.kDefaultPadding * 3,
-        bottom: AppStyles.kDefaultPadding / 2,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              statsText,
-              style: const TextStyle(
-                color: AppStyles.kPrimaryTextColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            statsText,
+            style: const TextStyle(
+              color: AppStyles.kPrimaryTextColor,
+              fontSize: kIsWeb ? 16 : 12,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2),
-                color: const Color(0xFFFBFDFF),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: AppStyles.kDefaultPadding / 2,
-                    child: FractionallySizedBox(
-                      widthFactor: widthFactor,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: color,
-                        ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: const Color(0xFFFBFDFF),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: kIsWeb
+                      ? AppStyles.kDefaultPadding
+                      : AppStyles.kDefaultPadding / 2,
+                  child: FractionallySizedBox(
+                    widthFactor: widthFactor > 1 ? 1 : widthFactor,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: color,
                       ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

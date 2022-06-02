@@ -32,20 +32,41 @@ class PokemonDetailsBody extends StatelessWidget {
           const SizedBox(
             height: AppStyles.kDefaultPadding,
           ),
-          PokemonDetailsStats(
-            statsText: "Vida",
-            color: const Color(0XFFF7802A),
-            widthFactor: pokemonModel.hp / 100,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AppStyles.kDefaultPadding,
+              right: AppStyles.kDefaultPadding * 3,
+              bottom: AppStyles.kDefaultPadding / 2,
+            ),
+            child: PokemonDetailsStats(
+              statsText: "Vida",
+              color: const Color(0XFFF7802A),
+              widthFactor: pokemonModel.hp / 100,
+            ),
           ),
-          PokemonDetailsStats(
-            statsText: "Defesa",
-            color: const Color(0XFFC4F789),
-            widthFactor: pokemonModel.defense / 100,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AppStyles.kDefaultPadding,
+              right: AppStyles.kDefaultPadding * 3,
+              bottom: AppStyles.kDefaultPadding / 2,
+            ),
+            child: PokemonDetailsStats(
+              statsText: "Defesa",
+              color: const Color(0XFFC4F789),
+              widthFactor: pokemonModel.defense / 100,
+            ),
           ),
-          PokemonDetailsStats(
-            statsText: "Ataque",
-            color: const Color(0XFFEA686D),
-            widthFactor: pokemonModel.attack / 100,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AppStyles.kDefaultPadding,
+              right: AppStyles.kDefaultPadding * 3,
+              bottom: AppStyles.kDefaultPadding / 2,
+            ),
+            child: PokemonDetailsStats(
+              statsText: "Ataque",
+              color: const Color(0XFFEA686D),
+              widthFactor: pokemonModel.attack / 100,
+            ),
           ),
         ],
       ),
